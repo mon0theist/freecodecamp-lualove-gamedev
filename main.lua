@@ -93,3 +93,81 @@ until count > 10
 -- USER INPUT
 print("What is your name?")
 local ans = io.read()
+
+-- TABLES (ARRAYS/LISTS)
+local tbl = {"a", "b", "c", 1, 2, 3}
+print(tbl) -- gives you the memory address
+table.insert(tbl, "X") -- appends to end, unless middle parameter specifies index
+table.remove(tbl, 1) -- removes by index, not value
+
+
+for i = 1, #tbl do -- length/number of items of tbl
+    print(tbl[i])
+end
+
+-- key/value pairs
+for index, value in pairs(tbl) do
+    print(index, value)
+end
+
+print(table.concat(tbl));
+
+-- named table/dictionary/object
+local dict = {
+    name = "Mike",
+    age = 12
+}
+
+print(dict[0]) -- returns nil
+print(dict["name"]) -- returns Mike
+
+-- FUNCTIONS
+local function SayHello()
+    print("Hello")
+end
+
+SayHello()
+
+-- WORKING WITH FILES
+io.output("myfile.txt") -- create file / overwrite file if it already exists
+local fileData = io.read("*all") -- can also do *line
+print(fileData)
+-- io.write("Hello World")
+io.close() -- close files after working with it
+
+--[[ io.write() writes to the current default output file.
+-- When you call:
+-- io.output("myfile.txt")
+-- Lua:
+-- Opens "myfile.txt" in write mode
+-- Sets it as the default output file
+-- Returns a file handle internally
+-- So then:
+-- io.write("Hello World")
+-- writes to whatever file is currently set as the default output.]]
+
+local file = io.open("myfile.txt", "w") -- open in write mode
+if file ~= nil then
+    file:write("Hello there!")
+    file:close()
+else
+    print("Could not open file")
+end
+
+--[[
+Why is it file:write instead of file.write ?
+🔥 The Short Answer
+file:write("Hello") is syntactic sugar for:
+file.write(file, "Hello")
+The colon : automatically passes the table itself as the first argument.
+]]
+
+-- CUSTOM MODULES
+-- "module" in lua refers to a lua file that returns a single table when called
+-- a file other than main.lua
+-- a package is a collection of modules
+-- see custom.lua
+local mod = require("custom.lua") --import custom.lua as a module
+
+-- OOP
+-- everything is an object
