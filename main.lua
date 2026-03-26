@@ -171,3 +171,13 @@ local mod = require("custom.lua") --import custom.lua as a module
 
 -- OOP
 -- everything is an object
+-- objects should return tables
+local function Pet()
+    return {
+        name = "Charlie"
+    }
+end
+
+local cat = Pet()
+print(cat.name)
+
