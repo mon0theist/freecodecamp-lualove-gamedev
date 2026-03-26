@@ -18,20 +18,35 @@ function love.load()
     _G.pacman = {
         x = 200,
         y = 250,
-        eat = false,
     }
-
-    _G.food_x = 600
+    
+    _G.food = {
+        x = 600,
+        eaten = false,
+    }
 end
 
 function love.update(dt) 
     -- runs at 60fps, game logic?
     -- dt = delta time, basically dt = frame
     Number = Number + 1
-    pacman.x = pacman.x + 1
 
-    if pacman.x >= food_x + 20 then
-        pacman.eat = true
+    if love.keyboard.isDown("a") then
+        pacman.x = pacman.x - 1
+    end
+    if love.keyboard.isDown("d") then
+        pacman.x = pacman.x + 1
+    end
+    if love.keyboard.isDown("w") then
+        pacman.y = pacman.y - 1
+    end
+    if love.keyboard.isDown("s") then
+        pacman.y = pacman.y + 1
+    end
+
+
+    if pacman.x >= food.x + 20 then
+        food.eaten = true
     end
 end
 
@@ -41,9 +56,9 @@ function love.draw()
     -- frames in upper-left corner
     love.graphics.print(Number)
 
-    if not pacman.eat then
+    if not food.eaten then
         love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("fill", food_x, 200, 70, 70)    
+        love.graphics.rectangle("fill", food.x, 200, 70, 70)    
     end
 
     love.graphics.circle("line", 100, 100, 50)    
