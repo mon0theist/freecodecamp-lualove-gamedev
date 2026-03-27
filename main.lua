@@ -18,6 +18,8 @@ function love.load()
     _G.pacman = {
         x = 200,
         y = 250,
+        angle1 = 1,
+        angle2 = 5,
     }
     
     _G.food = {
@@ -30,6 +32,14 @@ function love.update(dt)
     -- runs at 60fps, game logic?
     -- dt = delta time, basically dt = frame
     Number = Number + 1
+
+    if love.keyboard.isDown("down") then
+        pacman.angle1 = pacman.angle1 + math.pi * dt
+        pacman.angle2 = pacman.angle2 + math.pi * dt
+    elseif love.keyboard.isDown("up") then
+        pacman.angle1 = pacman.angle1 - math.pi * dt -- (math.pi * dt) basically means "he amount to rotate this frame at a speed of π radians per second."
+        pacman.angle2 = pacman.angle2 - math.pi * dt
+    end
 
     if love.keyboard.isDown("a") then
         pacman.x = pacman.x - 1
@@ -65,5 +75,5 @@ function love.draw()
 
     -- pacman
     love.graphics.setColor(1, 0.7, 0.1)
-    love.graphics.arc("fill", pacman.x, pacman.y, 60, 1, 5)
+    love.graphics.arc("fill", pacman.x, pacman.y, 60, pacman.angle1, pacman.angle2)
 end
