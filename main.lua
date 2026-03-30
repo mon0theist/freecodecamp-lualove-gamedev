@@ -94,5 +94,39 @@ function love.draw()
     -- draw visuals to screen
     love.graphics.scale(0.3)
 
-    love.graphics.draw(jack.sprite.image, quads[jack.animation.frame], jack.x, jack.y)
+    if jack.animation.direction == "right" then
+        love.graphics.draw(jack.sprite.image, quads[jack.animation.frame], jack.x, jack.y)
+    else
+        love.graphics.draw(jack.sprite.image, quads[jack.animation.frame], jack.x, jack.y, 0, -1, 1, QUAD_WIDTH, 0)
+        -- love.graphics.draw( texture,          quad,                       x,       y,   r, sx, sy, ox,        oy, kx, ky )
+        --[[ https://love2d.org/wiki/love.graphics.draw 
+        Synopsis
+        love.graphics.draw( texture, quad, x, y, r, sx, sy, ox, oy, kx, ky )
+        Arguments
+        Texture texture
+        A Texture (Image or Canvas) to texture the Quad with.
+        Quad quad
+        The Quad to draw on screen.
+        number x
+        The position to draw the object (x-axis).
+        number y
+        The position to draw the object (y-axis).
+        number r (0)
+        Orientation (radians).
+        number sx (1)
+        Scale factor (x-axis).
+        number sy (sx)
+        Scale factor (y-axis).
+        number ox (0)
+        Origin offset (x-axis).
+        number oy (0)
+        Origin offset (y-axis).
+        number kx (0)
+        Shearing factor (x-axis).
+        number ky (0)
+        Shearing factor (y-axis).
+        ]] 
+    end
+
+    
 end
