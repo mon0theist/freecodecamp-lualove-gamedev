@@ -2,6 +2,7 @@
 local love = require "love"
 
 local game = {
+    difficulty = 1,
     state = {
         menu = true,
         pause = false,
@@ -15,6 +16,8 @@ local player = {
     x = 30,
     y = 30,
 }
+
+local enemies = {}
 
 function love.load()
     love.window.setTitle("Save The Ball") -- also can be done in conf.lua
